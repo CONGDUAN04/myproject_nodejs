@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",// dịch code ts sang js
+    "esModuleInterop": true, // cho phép sử dụng import/export của ES6
+    "target": "es6", // dịch code js version nào?
+    "sourceMap": true, // tạo file .map để debug
+    "skipLibCheck": true, // bỏ qua kiểm tra các file thư viện
+    "outDir": "dist" ,// thư mục đầu ra của file js
+    "rootDir": "src", // thư mục gốc của file ts
+    "baseUrl":".",
+    "paths": {
+      "config/*": ["./src/config/*"],
+       "controllers/*": ["./src/controllers/*"],
+        "models/*": ["./src/models/*"],
+         "views/*": ["./src/views/*"],
+          "routes/*": ["./src/routes/*"],
+           "services/*": ["./src/services/*"],
+    }
+  }
+}
