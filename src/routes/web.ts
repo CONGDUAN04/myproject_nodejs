@@ -20,8 +20,9 @@ const upload = multer({ dest: "uploads/" });
 const router = express.Router();
 const webRoutes = (app: Express) => {
   //get users
+    router.get("/", getHomePage);
   router.get("/admin", getDashboardPage);
-  router.get("/", getHomePage);
+
 
   router.get("/admin", getDashboardPage);
   router.get("/admin/user", getAdminUserPage);

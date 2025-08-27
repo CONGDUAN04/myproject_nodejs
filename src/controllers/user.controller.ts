@@ -8,9 +8,7 @@ import {
   handleViewUser,
 } from "services/user.service";
 const getHomePage = async (req: Request, res: Response) => {
-  //get user
-  const users = await getAllUser();
-  return res.render("home", { users: users });
+  return res.render("client/home/show.ejs");
 };
 const getCreateUserPage = async (req: Request, res: Response) => {
   const roles = await getAllRole();
