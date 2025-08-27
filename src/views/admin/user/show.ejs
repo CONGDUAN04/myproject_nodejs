@@ -3,22 +3,96 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
     <meta name="author" content="Hỏi Dân IT" />
-    <title>Manager User - Cong Duan</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
-      rel="stylesheet"
-    />
+    <title>Manage Users - Cong Duan</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
     <link href="/admin/css/styles.css" rel="stylesheet" />
-    <script
-      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+      body {
+        background: #f4f6f9;
+      }
+      .card-modern {
+        border-radius: 1rem;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        border: none;
+        background: #fff;
+      }
+      .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #2c3e50;
+      }
+      .page-title i {
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: #fff;
+        padding: 10px;
+        border-radius: 12px;
+      }
+      .btn-create {
+        background: linear-gradient(45deg, #16a085, #1abc9c);
+        border: none;
+        font-weight: 600;
+        border-radius: 0.75rem;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(22,160,133,0.3);
+      }
+      .btn-create:hover {
+        background: linear-gradient(45deg, #138d75, #16a085);
+      }
+      .custom-breadcrumb {
+        background: #fff;
+        padding: 10px 15px;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      }
+      .custom-breadcrumb .breadcrumb-item a {
+        color: #3498db;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .custom-breadcrumb .breadcrumb-item a:hover {
+        text-decoration: underline;
+        color: #1d6fa5;
+      }
+      .custom-breadcrumb .breadcrumb-item.active {
+        font-weight: 600;
+        color: #555;
+      }
+      table {
+        border-radius: 0.75rem;
+        overflow: hidden;
+      }
+      table thead {
+        background: linear-gradient(45deg, #f8c471, #f39c12);
+        color: #fff;
+        font-weight: 600;
+      }
+      table tbody tr {
+        transition: all 0.2s;
+      }
+      table tbody tr:hover {
+        background: #fcf3cf !important;
+        box-shadow: inset 2px 0px 0px #f39c12;
+      }
+      .avatar-sm {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      }
+      .btn-action {
+        border-radius: 20px;
+        font-size: 0.8rem;
+        padding: 4px 10px;
+      }
+    </style>
   </head>
 
   <body class="sb-nav-fixed">
@@ -28,100 +102,84 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4">Manage Users</h1>
-            <ol class="breadcrumb mb-4">
-              <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-              <li class="breadcrumb-item active">Users</li>
+            <!-- Page title -->
+            <h1 class="mt-4 page-title">
+              <i class="fa-solid fa-users"></i> Manage Users
+            </h1>
+
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb mb-4 custom-breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="/admin"><i class="fa-solid fa-house me-1"></i> Dashboard</a>
+              </li>
+              <li class="breadcrumb-item active">
+                <i class="fa-solid fa-users me-1"></i> Users
+              </li>
             </ol>
-            <div>
-              <div
-                style="
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  margin-bottom: 10px;
-                "
-              >
-                <h3 style="margin: 0">List Users:</h3>
-                <a href="/admin/create-user" class="btn btn-warning"
-                  >Create a new user</a
-                >
+
+            <!-- Card List Users -->
+            <div class="card card-modern p-4">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-semibold mb-0"><i class="fa-solid fa-list me-2 text-warning"></i>List Users</h3>
+                <a href="/admin/create-user" class="btn btn-create px-3 py-2">
+                  <i class="fa-solid fa-user-plus me-2"></i> CREATE NEW USER
+                </a>
               </div>
-              <hr />
-            </div>
-            <div>
-              <table class="table table-hover table-striped table-bordered">
-                <thead class="bg-slate-100 text-slate-700 uppercase text-sm">
-                  <tr>
-                    <th class="py-3 px-4 text-left font-semibold tracking-wide">
-                      ID
-                    </th>
-                    <th class="py-3 px-4 text-left font-semibold tracking-wide">
-                      Name
-                    </th>
-                    <th class="py-3 px-4 text-left font-semibold tracking-wide">
-                      Email
-                    </th>
-                    <th class="py-3 px-4 text-left font-semibold tracking-wide">
-                      Address
-                    </th>
-                    <th class="py-3 px-4 text-left font-semibold tracking-wide">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% users.forEach( function (user) { %>
-                  <tr>
-                    <td><%= user.id %></td>
-                    <td><%= user.fullName %></td>
-                    <td><%= user.username %></td>
-                    <td><%= user.address %></td>
-                    <td>
-                      <div style="display: flex; gap: 10px">
-                        <form
-                          action="/admin/view-user/<%= user.id %>"
-                          method="get"
-                        >
-                          <button tpye="submit" class="btn btn-warning">
-                            View
-                          </button>
-                        </form>
-                        <form
-                          action="/admin/delete-user/<%= user.id %>"
-                          method="post"
-                        >
-                          <button tpye="submit" class="btn btn-danger">
-                            Delete
-                          </button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
-                  <% }) %>
-                </tbody>
-              </table>
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle text-center">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Avatar</th>
+                      <th>Full Name</th>
+                      <th>Email</th>
+                      <th>Address</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% users.forEach(function (user) { %>
+                      <tr>
+                        <td><%= user.id %></td>
+                        <td>
+                          <% if (user.avatar) { %>
+                            <img src="/images/<%= user.avatar %>" class="avatar-sm" alt="avatar"/>
+                          <% } else { %>
+                            <img src="https://via.placeholder.com/40x40?text=?" class="avatar-sm" alt="avatar"/>
+                          <% } %>
+                        </td>
+                        <td><%= user.fullName %></td>
+                        <td><%= user.username %></td>
+                        <td><%= user.address %></td>
+                        <td>
+                          <div class="d-flex justify-content-center gap-2">
+                            <form action="/admin/view-user/<%= user.id %>" method="get">
+                              <button type="submit" class="btn btn-sm btn-warning btn-action">
+                                <i class="fa-solid fa-eye"></i> View
+                              </button>
+                            </form>
+                            <form action="/admin/delete-user/<%= user.id %>" method="post">
+                              <button type="submit" class="btn btn-sm btn-danger btn-action">
+                                <i class="fa-solid fa-trash"></i> Delete
+                              </button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </main>
         <%- include('../layout/footer'); -%>
       </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      crossorigin="anonymous"
-    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/admin/js/scripts.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="/admin/assets/demo/chart-area-demo.js"></script>
-    <script src="/admin/assets/demo/chart-bar-demo.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     <script src="/admin/js/datatables-simple-demo.js"></script>
   </body>
 </html>

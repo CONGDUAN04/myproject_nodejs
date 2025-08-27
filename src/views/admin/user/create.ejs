@@ -7,9 +7,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-    <meta name="author" content="Hỏi Dân IT" />
-    <title>Create User - Hỏi Dân IT</title>
+    <meta name="description" content="Dự án laptopshop" />
+    <meta name="author" content="CongDuan" />
+    <title>Create User</title>
     <link href="/admin/css/styles.css" rel="stylesheet" />
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
@@ -26,6 +26,56 @@
         });
       });
     </script>
+    <style>
+      .card-modern {
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: none;
+      }
+      .form-control,
+      .form-select,
+      .btn {
+        border-radius: 0.75rem;
+      }
+      .btn-warning {
+        background: linear-gradient(45deg, #f39c12, #f1c40f);
+        border: none;
+        font-weight: 600;
+      }
+      .btn-warning:hover {
+        background: linear-gradient(45deg, #e67e22, #f39c12);
+      }
+      #avatarPreview {
+        width: 100%;          /* full ngang như ô Address */
+        max-height: 250px;
+        object-fit: contain;  /* giữ tỉ lệ ảnh */
+        border-radius: 0.75rem;
+        margin-top: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        display: none;
+      }
+      /* Breadcrumb đẹp */
+      .custom-breadcrumb {
+        background: #fff;
+        padding: 10px 15px;
+        border-radius: 0.75rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      }
+      .custom-breadcrumb .breadcrumb-item a {
+        color: #3498db;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease-in-out;
+      }
+      .custom-breadcrumb .breadcrumb-item a:hover {
+        color: #1d6fa5;
+        text-decoration: underline;
+      }
+      .custom-breadcrumb .breadcrumb-item.active {
+        font-weight: 600;
+        color: #555;
+      }
+    </style>
   </head>
 
   <body class="sb-nav-fixed">
@@ -35,49 +85,54 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4">Manage Users</h1>
-            <ol class="breadcrumb mb-4">
-              <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+            <h1 class="mt-4 fw-bold text-dark">👤 Manage Users</h1>
+
+            <!-- Breadcrumb đẹp -->
+            <ol class="breadcrumb mb-4 custom-breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="/admin"><i class="fa-solid fa-house me-1"></i> Dashboard</a>
+              </li>
               <li class="breadcrumb-item active">
-                <a href="/admin/user">User</a>
+                <i class="fa-solid fa-users me-1"></i> User
               </li>
             </ol>
+
             <div class="row">
-              <div class="col-6 mx-auto">
-                <div>
-                  <h3 style="padding: 10px 0">Create a user:</h3>
+              <div class="col-lg-7 col-md-8 col-12 mx-auto">
+                <div class="card card-modern p-4">
+                  <h3 class="mb-4 fw-semibold text-center">CREATE NEW USER</h3>
                   <form
                     action="/admin/handle-create-user"
                     method="post"
                     enctype="multipart/form-data"
                   >
                     <div class="mb-3">
-                      <label class="form-label">Full Name:</label>
+                      <label class="form-label fw-medium">Full Name</label>
                       <input
                         name="fullName"
                         type="text"
                         class="form-control"
-                        placeholder="your name"
+                        placeholder="Enter full name"
                       />
                     </div>
+
                     <div class="row">
-                      <div class="mb-3 col-6">
-                        <label class="form-label">Phone:</label>
-                        <input type="text" class="form-control" name="phone" />
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label fw-medium">Phone</label>
+                        <input type="text" class="form-control" name="phone" placeholder="0123456789"/>
                       </div>
-                      <div class="mb-3 col-6">
-                        <label class="form-label">Role:</label>
+                      <div class="mb-3 col-md-6">
+                        <label class="form-label fw-medium">Role</label>
                         <select name="role" class="form-select">
                           <% roles.forEach((role,index) => { %>
-                          <option value="<%-role.id %>">
-                            <%- role.name %>
-                          </option>
+                          <option value="<%-role.id %>"><%- role.name %></option>
                           <%})%>
                         </select>
                       </div>
                     </div>
+
                     <div class="mb-3">
-                      <label class="form-label">Email:</label>
+                      <label class="form-label fw-medium">Email</label>
                       <input
                         name="username"
                         type="email"
@@ -85,8 +140,10 @@
                         placeholder="name@example.com"
                       />
                     </div>
+
+                    <!-- Avatar Upload + Preview -->
                     <div class="mb-3">
-                      <label for="formFile" class="form-label">Avatar:</label>
+                      <label for="avatarFile" class="form-label fw-medium">Avatar</label>
                       <input
                         name="avatar"
                         class="form-control"
@@ -94,27 +151,22 @@
                         id="avatarFile"
                         accept=".png, .jpg, .jpeg"
                       />
+                      <img id="avatarPreview" alt="avatar preview" />
                     </div>
-                    <img
-                      style="
-                        max-height: 250px;
-                        max-height: 300px;
-                        display: none;
-                      "
-                      alt="avatar preview"
-                      id="avatarPreview"
-                    />
+
                     <div class="mb-3">
-                      <label class="form-label">Address</label>
+                      <label class="form-label fw-medium">Address</label>
                       <textarea
                         name="address"
                         class="form-control"
                         rows="2"
+                        placeholder="Enter address..."
                       ></textarea>
                     </div>
-                    <div class="mb-3">
-                      <button type="submit" class="btn btn-warning">
-                        Submit
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-warning px-4 py-2">
+                        <i class="fa-solid fa-paper-plane me-2"></i> Submit
                       </button>
                     </div>
                   </form>
