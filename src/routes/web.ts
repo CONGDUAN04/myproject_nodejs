@@ -6,24 +6,23 @@ import {
   postDeleteUser,
   getViewUser,
   postUpdateUser,
-} from "src/controllers/user.controller";
+} from "controllers/admin/user.controller";
 import {
   getAdminOrderPage,
   getAdminProductPage,
   getAdminUserPage,
   getDashboardPage,
-} from "controllers/dashboard.controller";
+} from "controllers/admin/dashboard.controller";
 import fileUploadMiddleware from "src/middleware/multer";
+import { getProductPage } from "controllers/client/product.controller";
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
 const router = express.Router();
 const webRoutes = (app: Express) => {
-  //get users
-    router.get("/", getHomePage);
-  router.get("/admin", getDashboardPage);
-
-
+ router.get("/", getHomePage);
+ router.get("/product/:id", getProductPage)
+ //admin router
   router.get("/admin", getDashboardPage);
   router.get("/admin/user", getAdminUserPage);
   router.get("/admin/create-user", getCreateUserPage);
