@@ -14,7 +14,6 @@ const getAdminUserPage = async (req: Request, res: Response) => {
 };
 
 const getAdminProductPage = async (req: Request, res: Response) => {
-  //get user
   return res.render("admin/product/show.ejs");
 };
 const getAdminOrderPage = async (req: Request, res: Response) => {

@@ -94,13 +94,18 @@
                 >
               </li>
               <li class="breadcrumb-item active">
-                <i class="fa-solid fa-users me-1"></i> Product
+                <i class="fa-solid fa-laptop me-1"></i> Product
               </li>
             </ol>
 
             <div class="row">
               <div class="col-lg-7 col-md-8 col-12 mx-auto">
                 <div class="card card-modern p-4">
+                  <% errors.forEach(function (error) { %>
+                  <div class="alert alert-danger">
+                    <%= error %>
+                  </div>
+                  <% }) %>
                   <h3 class="mb-4 fw-semibold text-center">
                     CREATE NEW PRODUCT
                   </h3>
@@ -111,13 +116,18 @@
                   >
                     <div class="mb-3">
                       <label class="form-label fw-medium">Name</label>
-                      <input name="name" type="text" class="form-control" />
+                      <input value="<%= oldData.name %>" name="name" type="text" class="form-control" />
                     </div>
 
                     <div class="row">
                       <div class="mb-3 col-md-6">
                         <label class="form-label fw-medium">Price</label>
-                        <input type="text" class="form-control" name="price" />
+                        <input
+                        value="<%= oldData.price %>"
+                          type="number"
+                          class="form-control"
+                          name="price"
+                        />
                       </div>
                       <div class="mb-3 col-md-6">
                         <label class="form-label fw-medium"
@@ -126,7 +136,8 @@
                         <textarea
                           name="detailDesc"
                           class="form-control"
-                        ></textarea>
+                        >
+                      <%= oldData.detailDesc %></textarea>
                       </div>
                     </div>
                     <div class="row">
@@ -135,6 +146,7 @@
                           >Short Description</label
                         >
                         <input
+                        value="<%= oldData.shortDesc %>"
                           type="text"
                           class="form-control"
                           name="shortDesc"
@@ -143,6 +155,7 @@
                       <div class="mb-3 col-md-6">
                         <label class="form-label fw-medium">Quantity</label>
                         <input
+                        value="<%= oldData.quantity %>"
                           type="text"
                           class="form-control"
                           name="quantity"
@@ -190,7 +203,10 @@
                       <img id="avatarPreview" alt="avatar preview" />
                     </div>
                     <div class="text-center">
-                      <button type="submit" class="btn btn-warning px-4 py-2">
+                      <button
+                        type="submit"
+                        class="btn btn-warning px-4 py-2 mt-3"
+                      >
                         <i class="fa-solid fa-paper-plane me-2"></i> Submit
                       </button>
                     </div>
