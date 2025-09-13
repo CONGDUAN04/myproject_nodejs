@@ -10,7 +10,7 @@ const handleCreateUser = async (
   email: string,
   address: string,
   phone: string,
-  avatar: string | null, // ✅ thêm tham số avatar
+  avatar: string | null,
   role: string
 ) => {
   const defaultPassword = await hashPassword("123456");
@@ -22,7 +22,7 @@ const handleCreateUser = async (
       password: defaultPassword,
       accountType: ACCOUNT_TYPE.SYSTEM,
       phone,
-      avatar, // ✅ giờ có tham số để dùng
+      avatar,
       roleId: +role,
     },
   });

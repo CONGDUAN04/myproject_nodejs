@@ -9,7 +9,7 @@ export const ProductSchema = z.object({
       message: "Số tiền tối thiểu là 1",
     }),
 
-  detailDecs: z
+  detailDesc: z
     .string()
     .trim()
     .min(1, { message: "detailDesc không được để trống" }),

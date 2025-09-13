@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
 import {
   getAllRole,
-  getAllUser,
   handleCreateUser,
   handleDeleteUser,
-  handleUpdateUser, // 👈 đây mới là hàm update service
+  handleUpdateUser,
   handleViewUser,
 } from "services/user.service";
 const getHomePage = async (req: Request, res: Response) => {

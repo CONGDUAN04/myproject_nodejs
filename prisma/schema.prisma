@@ -50,11 +50,12 @@ model Product {
   name       String  @db.VarChar(255)
   price      Int
   image      String? @db.VarChar(255)
-  detailDesc String? @db.VarChar(255)
-  shortDesc  String? @db.VarChar(255)
-  quantity   Int?
-  factory    String? @db.VarChar(255)
-  target     String? @db.VarChar(255)
+  detailDesc String @db.VarChar(255)
+  shortDesc  String @db.VarChar(255)
+  quantity   Int
+  sold       Int?     @default(0)
+  factory    String @db.VarChar(255)
+  target     String @db.VarChar(255)
 
   @@map("products")
 }

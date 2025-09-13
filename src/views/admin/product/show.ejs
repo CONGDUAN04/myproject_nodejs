@@ -140,7 +140,7 @@
                   href="/admin/create-product"
                   class="btn btn-create px-3 py-2"
                 >
-                  <i class="fa-solid fa-user-plus me-2"></i> CREATE NEW PRODUCT
+                  <i class="fa-solid fa-laptop me-2"></i> CREATE NEW PRODUCT
                 </a>
               </div>
               <div class="table-responsive">
@@ -156,7 +156,28 @@
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody></tbody>
+                  <tbody> <% products.forEach(function (product) { %>
+                      <tr>
+                        <td><%= product.id %></td>
+                        <td><%= product.name %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.factory %></td>
+                        <td>
+                          <div class="d-flex justify-content-center gap-2">
+                            <form action="/admin/view-product/<%= product.id %>" method="get">
+                              <button type="submit" class="btn btn-sm btn-warning btn-action">
+                                <i class="fa-solid fa-eye"></i> View
+                              </button>
+                            </form>
+                            <form action="/admin/delete-product/<%= product.id %>" method="post">
+                              <button type="submit" class="btn btn-sm btn-danger btn-action">
+                                <i class="fa-solid fa-trash"></i> Delete
+                              </button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    <% }) %></tbody>
                 </table>
               </div>
             </div>
