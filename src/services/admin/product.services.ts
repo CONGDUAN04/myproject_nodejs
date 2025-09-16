@@ -37,8 +37,8 @@ const handleViewProduct = async (id: string) => {
   const product = await prisma.product.findUnique({ where: { id: +id } });
   return product;
 };
-const handleUpdateProduct = async (
-  id: string,
+const handleUpdateProductById = async (
+  id: number,
   name: string,
   price: number,
   detailDesc: string,
@@ -46,20 +46,19 @@ const handleUpdateProduct = async (
   quantity: number,
   factory: string,
   target: string,
-  image: string
+  imageUpload: string
 ) => {
   const updatedProduct = await prisma.product.update({
-    where: { id: +id },
+    where: { id },
     data: {
-      name: name,
-      price: +price,
-      detailDesc: detailDesc,
-      shortDesc: shortDesc,
-      quantity: +quantity,
-      factory: factory,
-      target: target,
-      image: image,
-      ...(image !== undefined && { image: image }),
+      name,
+      price,
+      detailDesc,
+      shortDesc,
+      quantity,
+      factory,
+      target,
+      ...(imageUpload && { image: imageUpload }),
     },
   });
   return updatedProduct;
@@ -70,5 +69,5 @@ export {
   getProductList,
   handleDeleteProduct,
   handleViewProduct,
-  handleUpdateProduct,
+  handleUpdateProductById,
 };

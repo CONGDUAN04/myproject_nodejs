@@ -75,6 +75,20 @@
         font-weight: 600;
         color: #555;
       }
+      .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #2c3e50;
+      }
+      .page-title i {
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: #fff;
+        padding: 10px;
+        border-radius: 12px;
+      } 
     </style>
   </head>
 
@@ -85,19 +99,26 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-           <h1 class="mt-4 page-title">
+            <h1 class="mt-4 page-title">
               <i class="fa-solid fa-users"></i> Manage Users
             </h1>
 
             <!-- Breadcrumb đẹp -->
-            <ol class="breadcrumb mb-4 custom-breadcrumb">
+           <ol class="breadcrumb mb-4 custom-breadcrumb">
               <li class="breadcrumb-item">
-                <a href="/admin"><i class="fa-solid fa-house me-1"></i> Dashboard</a>
+                <a href="/admin">
+                  <i class="fa-solid fa-house me-1"></i> Dashboard
+                </a>
               </li>
-              <li class="breadcrumb-item active">
-                <i class="fa-solid fa-user me-1"></i> Detail User
+              <li class="breadcrumb-item">
+                <a href="/admin/user">
+                  <i class="fa-solid fa-users me-1"></i> Users
+                </a>
               </li>
-            </ol>
+              <li class="breadcrumb-item active" aria-current="page">
+                <i></i> Details
+              </li>
+            </ol> 
 
             <div class="row">
               <div class="col-lg-7 col-md-8 col-12 mx-auto">

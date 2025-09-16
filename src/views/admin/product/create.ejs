@@ -10,67 +10,97 @@
     <meta name="description" content="Dự án laptopshop" />
     <meta name="author" content="CongDuan" />
     <title>Create Product</title>
+
+    <!-- CSS -->
     <link href="/admin/css/styles.css" rel="stylesheet" />
+
+    <!-- Font Awesome -->
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script>
       $(document).ready(() => {
         const avatarFile = $("#avatarFile");
         avatarFile.change(function (e) {
           const imgURL = URL.createObjectURL(e.target.files[0]);
-          $("#avatarPreview").attr("src", imgURL);
-          $("#avatarPreview").css({ display: "block" });
+          $("#avatarPreview").attr("src", imgURL).css({ display: "block" });
         });
       });
     </script>
+
     <style>
+      .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #2c3e50;
+      }
+      .page-title i {
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: #fff;
+        padding: 10px;
+        border-radius: 12px;
+      }
       .card-modern {
         border-radius: 1rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         border: none;
+        background: #fff;
       }
+
       .form-control,
       .form-select,
       .btn {
         border-radius: 0.75rem;
       }
+
       .btn-warning {
         background: linear-gradient(45deg, #f39c12, #f1c40f);
         border: none;
         font-weight: 600;
       }
+
       .btn-warning:hover {
         background: linear-gradient(45deg, #e67e22, #f39c12);
       }
+
       #avatarPreview {
-        width: 100%; /* full ngang như ô Address */
+        width: 100%;
         max-height: 250px;
-        object-fit: contain; /* giữ tỉ lệ ảnh */
+        object-fit: contain;
         border-radius: 0.75rem;
         margin-top: 10px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         display: none;
       }
-      /* Breadcrumb đẹp */
+
+      /* Breadcrumb */
       .custom-breadcrumb {
         background: #fff;
         padding: 10px 15px;
         border-radius: 0.75rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       }
+
       .custom-breadcrumb .breadcrumb-item a {
         color: #3498db;
         font-weight: 500;
         text-decoration: none;
         transition: color 0.2s ease-in-out;
       }
+
       .custom-breadcrumb .breadcrumb-item a:hover {
         color: #1d6fa5;
         text-decoration: underline;
       }
+
       .custom-breadcrumb .breadcrumb-item.active {
         font-weight: 600;
         color: #555;
@@ -80,21 +110,32 @@
 
   <body class="sb-nav-fixed">
     <%- include('../layout/header'); -%>
+
     <div id="layoutSidenav">
       <%- include('../layout/sidenav'); -%>
+
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <h1 class="mt-4 fw-bold text-dark">💻 Manage Product</h1>
-            <!-- Breadcrumb đẹp -->
+            <!-- Page title -->
+            <h1 class="mt-4 page-title">
+              <i class="fa-solid fa-laptop"></i> Manage Products
+            </h1>
+
+            <!-- Breadcrumb -->
             <ol class="breadcrumb mb-4 custom-breadcrumb">
               <li class="breadcrumb-item">
-                <a href="/admin"
-                  ><i class="fa-solid fa-house me-1"></i> Dashboard</a
-                >
+                <a href="/admin">
+                  <i class="fa-solid fa-house me-1"></i> Dashboard
+                </a>
               </li>
-              <li class="breadcrumb-item active">
-                <i class="fa-solid fa-laptop me-1"></i> Product
+              <li class="breadcrumb-item">
+                <a href="/admin/product">
+                  <i class="fa-solid fa-laptop me-1"></i> Products
+                </a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                <i></i> Create
               </li>
             </ol>
 
@@ -102,51 +143,55 @@
               <div class="col-lg-7 col-md-8 col-12 mx-auto">
                 <div class="card card-modern p-4">
                   <% errors.forEach(function (error) { %>
-                  <div class="alert alert-danger">
-                    <%= error %>
-                  </div>
+                    <div class="alert alert-danger"><%= error %></div>
                   <% }) %>
+
                   <h3 class="mb-4 fw-semibold text-center">
                     CREATE NEW PRODUCT
                   </h3>
+
                   <form
                     action="/admin/create-product"
                     method="post"
                     enctype="multipart/form-data"
                   >
+                    <!-- Name -->
                     <div class="mb-3">
                       <label class="form-label fw-medium">Name</label>
-                      <input value="<%= oldData.name %>" name="name" type="text" class="form-control" />
+                      <input
+                        value="<%= oldData.name %>"
+                        name="name"
+                        type="text"
+                        class="form-control"
+                      />
                     </div>
 
+                    <!-- Price & Detail Description -->
                     <div class="row">
                       <div class="mb-3 col-md-6">
                         <label class="form-label fw-medium">Price</label>
                         <input
-                        value="<%= oldData.price %>"
+                          value="<%= oldData.price %>"
                           type="number"
                           class="form-control"
                           name="price"
                         />
                       </div>
                       <div class="mb-3 col-md-6">
-                        <label class="form-label fw-medium"
-                          >Detail Description</label
-                        >
+                        <label class="form-label fw-medium">Detail Description</label>
                         <textarea
                           name="detailDesc"
                           class="form-control"
-                        >
-                      <%= oldData.detailDesc %></textarea>
+                        ><%= oldData.detailDesc %></textarea>
                       </div>
                     </div>
+
+                    <!-- Short Description & Quantity -->
                     <div class="row">
                       <div class="mb-3 col-md-6">
-                        <label class="form-label fw-medium"
-                          >Short Description</label
-                        >
+                        <label class="form-label fw-medium">Short Description</label>
                         <input
-                        value="<%= oldData.shortDesc %>"
+                          value="<%= oldData.shortDesc %>"
                           type="text"
                           class="form-control"
                           name="shortDesc"
@@ -155,13 +200,15 @@
                       <div class="mb-3 col-md-6">
                         <label class="form-label fw-medium">Quantity</label>
                         <input
-                        value="<%= oldData.quantity %>"
+                          value="<%= oldData.quantity %>"
                           type="text"
                           class="form-control"
                           name="quantity"
                         />
                       </div>
                     </div>
+
+                    <!-- Factory & Target -->
                     <div class="row">
                       <div class="mb-3 col-md-6">
                         <label class="form-label">Factory</label>
@@ -178,21 +225,17 @@
                         <label class="form-label">Target</label>
                         <select name="target" class="form-select">
                           <option value="GAMING">Gaming</option>
-                          <option value="SINHVIEN-VANPHONG">
-                            Sinh viên - Văn phòng
-                          </option>
-                          <option value="THIET-KE-DO-HOA">
-                            Thiết kế đồ họa
-                          </option>
+                          <option value="SINHVIEN-VANPHONG">Sinh viên - Văn phòng</option>
+                          <option value="THIET-KE-DO-HOA">Thiết kế đồ họa</option>
                           <option value="MONG-NHE">Mỏng nhẹ</option>
                           <option value="DOANH-NHAN">Doanh nhân</option>
                         </select>
                       </div>
                     </div>
+
+                    <!-- Avatar -->
                     <div class="mb-3">
-                      <label for="avatarFile" class="form-label fw-medium"
-                        >Avatar</label
-                      >
+                      <label for="avatarFile" class="form-label fw-medium">Avatar</label>
                       <input
                         name="avatar"
                         class="form-control"
@@ -202,11 +245,10 @@
                       />
                       <img id="avatarPreview" alt="avatar preview" />
                     </div>
+
+                    <!-- Submit -->
                     <div class="text-center">
-                      <button
-                        type="submit"
-                        class="btn btn-warning px-4 py-2 mt-3"
-                      >
+                      <button type="submit" class="btn btn-warning px-4 py-2 mt-3">
                         <i class="fa-solid fa-paper-plane me-2"></i> Submit
                       </button>
                     </div>
@@ -216,9 +258,12 @@
             </div>
           </div>
         </main>
+
         <%- include('../layout/footer'); -%>
       </div>
     </div>
+
+    <!-- Bootstrap -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"

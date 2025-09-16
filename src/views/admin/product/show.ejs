@@ -10,25 +10,32 @@
     <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
     <meta name="author" content="Hỏi Dân IT" />
     <title>Manage Product - Cong Duan</title>
+
+    <!-- Styles -->
     <link
       href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
       rel="stylesheet"
     />
     <link href="/admin/css/styles.css" rel="stylesheet" />
+
+    <!-- Font Awesome -->
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
       crossorigin="anonymous"
     ></script>
+
     <style>
       body {
         background: #f4f6f9;
       }
+
       .card-modern {
         border-radius: 1rem;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         border: none;
         background: #fff;
       }
+
       .page-title {
         font-size: 2rem;
         font-weight: 700;
@@ -37,12 +44,14 @@
         gap: 10px;
         color: #2c3e50;
       }
+
       .page-title i {
         background: linear-gradient(135deg, #f39c12, #e67e22);
         color: #fff;
         padding: 10px;
         border-radius: 12px;
       }
+
       .btn-create {
         background: linear-gradient(45deg, #16a085, #1abc9c);
         border: none;
@@ -51,44 +60,54 @@
         color: #fff;
         box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
       }
+
       .btn-create:hover {
         background: linear-gradient(45deg, #138d75, #16a085);
       }
+
       .custom-breadcrumb {
         background: #fff;
         padding: 10px 15px;
         border-radius: 0.75rem;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       }
+
       .custom-breadcrumb .breadcrumb-item a {
         color: #3498db;
         font-weight: 500;
         text-decoration: none;
       }
+
       .custom-breadcrumb .breadcrumb-item a:hover {
         text-decoration: underline;
         color: #1d6fa5;
       }
+
       .custom-breadcrumb .breadcrumb-item.active {
         font-weight: 600;
         color: #555;
       }
+
       table {
         border-radius: 0.75rem;
         overflow: hidden;
       }
+
       table thead {
         background: linear-gradient(45deg, #f8c471, #f39c12);
         color: #fff;
         font-weight: 600;
       }
+
       table tbody tr {
         transition: all 0.2s;
       }
+
       table tbody tr:hover {
         background: #fcf3cf !important;
         box-shadow: inset 2px 0px 0px #f39c12;
       }
+
       .avatar-sm {
         width: 40px;
         height: 40px;
@@ -96,6 +115,7 @@
         object-fit: cover;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
       }
+
       .btn-action {
         border-radius: 20px;
         font-size: 0.8rem;
@@ -106,8 +126,10 @@
 
   <body class="sb-nav-fixed">
     <%- include('../layout/header'); -%>
+
     <div id="layoutSidenav">
       <%- include('../layout/sidenav'); -%>
+
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
@@ -119,34 +141,29 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb mb-4 custom-breadcrumb">
               <li class="breadcrumb-item">
-                <a href="/admin"
-                  ><i class="fa-solid fa-house me-1"></i> Dashboard</a
-                >
+                <a href="/admin">
+                  <i class="fa-solid fa-house me-1"></i> Dashboard
+                </a>
               </li>
-              <li class="breadcrumb-item active">
+              <li class="breadcrumb-item active" aria-current="page">
                 <i class="fa-solid fa-laptop me-1"></i> Products
               </li>
             </ol>
 
-            <!-- Card List Users -->
+            <!-- Card List Products -->
             <div class="card card-modern p-4">
-              <div
-                class="d-flex justify-content-between align-items-center mb-3"
-              >
+              <div class="d-flex justify-content-between align-items-center mb-3">
                 <h3 class="fw-semibold mb-0">
-                  <i class="fa-solid fa-list me-2 text-warning"></i>List Product
+                  <i class="fa-solid fa-list me-2 text-warning"></i> List Product
                 </h3>
-                <a
-                  href="/admin/create-product"
-                  class="btn btn-create px-3 py-2"
-                >
+
+                <a href="/admin/create-product" class="btn btn-create px-3 py-2">
                   <i class="fa-solid fa-laptop me-2"></i> CREATE NEW PRODUCT
                 </a>
               </div>
+
               <div class="table-responsive">
-                <table
-                  class="table table-hover table-bordered align-middle text-center"
-                >
+                <table class="table table-hover table-bordered align-middle text-center">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -156,7 +173,8 @@
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody> <% products.forEach(function (product) { %>
+                  <tbody>
+                    <% products.forEach(function (product) { %>
                       <tr>
                         <td><%= product.id %></td>
                         <td><%= product.name %></td>
@@ -164,29 +182,45 @@
                         <td><%= product.factory %></td>
                         <td>
                           <div class="d-flex justify-content-center gap-2">
-                            <form action="/admin/view-product/<%= product.id %>" method="get">
-                              <button type="submit" class="btn btn-sm btn-warning btn-action">
+                            <form
+                              action="/admin/view-product/<%= product.id %>"
+                              method="get"
+                            >
+                              <button
+                                type="submit"
+                                class="btn btn-sm btn-warning btn-action"
+                              >
                                 <i class="fa-solid fa-eye"></i> View
                               </button>
                             </form>
-                            <form action="/admin/delete-product/<%= product.id %>" method="post">
-                              <button type="submit" class="btn btn-sm btn-danger btn-action">
+
+                            <form
+                              action="/admin/delete-product/<%= product.id %>"
+                              method="post"
+                            >
+                              <button
+                                type="submit"
+                                class="btn btn-sm btn-danger btn-action"
+                              >
                                 <i class="fa-solid fa-trash"></i> Delete
                               </button>
                             </form>
                           </div>
                         </td>
                       </tr>
-                    <% }) %></tbody>
+                    <% }) %>
+                  </tbody>
                 </table>
               </div>
             </div>
           </div>
         </main>
+
         <%- include('../layout/footer'); -%>
       </div>
     </div>
 
+    <!-- Scripts -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import {
   createProduct,
   handleDeleteProduct,
-  handleUpdateProduct,
+  handleUpdateProductById,
   handleViewProduct,
 } from "services/admin/product.services";
 import { ProductSchema, TProductSchema } from "src/validation/product.schema";
@@ -70,16 +70,15 @@ const getViewProduct = async (req: Request, res: Response) => {
 };
 const postUpdateProduct = async (req: Request, res: Response) => {
   const { id, name, price, detailDesc, shortDesc, quantity, factory, target } =
-    req.body;
-  const file = req.file;
-  const image = file?.filename ?? undefined;
-  await handleUpdateProduct(
-    id,
+    req.body as TProductSchema;
+  const image = req.file?.filename ?? null;
+  await handleUpdateProductById(
+    +id,
     name,
-    price,
+    +price,
     detailDesc,
     shortDesc,
-    quantity,
+    +quantity,
     factory,
     target,
     image
