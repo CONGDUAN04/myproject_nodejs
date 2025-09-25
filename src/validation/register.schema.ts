@@ -5,18 +5,18 @@ const passwordSchema = z
     .string()
     .min(3, { message: "Password tối thiểu 3 kí tự" })
     .max(20, { message: "Password tối đa 20 kí tự" })
-    .refine((password) => /[A-Z]/.test(password), {
-        message: "Password bao gồm ít nhất 1 kí tự viết hoa"
-    })
-    .refine((password) => /[a-z]/.test(password), {
-        message: "Password bao gồm ít nhất 1 kí tự viết thường"
-    })
-    .refine((password) => /[0-9]/.test(password), {
-        message: "Password bao gồm ít nhất 1 chữ số"
-    })
-    .refine((password) => /[!@#$%^&*]/.test(password), {
-        message: "Password bao gồm ít nhất 1 kí tự đặc biệt"
-    });
+    // .refine((password) => /[A-Z]/.test(password), {
+    //     message: "Password bao gồm ít nhất 1 kí tự viết hoa"
+    // })
+    // .refine((password) => /[a-z]/.test(password), {
+    //     message: "Password bao gồm ít nhất 1 kí tự viết thường"
+    // })
+    // .refine((password) => /[0-9]/.test(password), {
+    //     message: "Password bao gồm ít nhất 1 chữ số"
+    // })
+    // .refine((password) => /[!@#$%^&*]/.test(password), {
+    //     message: "Password bao gồm ít nhất 1 kí tự đặc biệt"
+    // });
 const emailSchema =
     z.string().email("Email không đúng định dạng")
         .refine(async (email) => {
@@ -33,7 +33,7 @@ export const RegisterSchema = z.object({
     confirmPassword: z.string(),
     })
 .refine((data)=> data.password === data.confirmPassword,{
-    message:"Password confirm khong chinh xacs",
+    message:"Password confirm không khớp",
     path:['confirmPassword']
 });
 export type TRegisterSchema = z.infer<typeof RegisterSchema>;

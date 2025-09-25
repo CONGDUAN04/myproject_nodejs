@@ -1,6 +1,6 @@
 import { prisma } from "config/client";
 import { ACCOUNT_TYPE } from "config/constant";
-import { hashPassword } from "services/user.service";
+import { comparePassword, hashPassword } from "services/user.service";
 
 const isEmailExist = async (email: string) => {
     const user = await prisma.user.findUnique({
@@ -9,7 +9,7 @@ const isEmailExist = async (email: string) => {
     if(user) {return true;}
     return false;
 }
-const registerNewUser = async ({ fullName, email, password }: { fullName: string; email: string; password: string }) => {
+const registerNewUser = async (fullName:string,email:string,password:string) => {
     const newPassword = await hashPassword(password);
     const userRole = await prisma.role.findUnique({
         where: { name: "USER" },
@@ -28,4 +28,5 @@ const registerNewUser = async ({ fullName, email, password }: { fullName: string
         throw new Error("User role not found");
     }
 }
+
 export { isEmailExist, registerNewUser };
