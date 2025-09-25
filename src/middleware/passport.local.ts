@@ -1,7 +1,9 @@
 import { prisma } from 'config/client';
+import { get } from 'node:http';
+import { URLSearchParams } from 'node:url';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { comparePassword } from 'services/user.service';
+import { comparePassword, getAllUser } from 'services/user.service';
 const configPassportLocal = () => {
     passport.use(new LocalStrategy({passReqToCallback:true},async function verify(req,username, password, callback) {
         const {session} = req as any;
@@ -28,17 +30,18 @@ const configPassportLocal = () => {
     }
 }));
 
-    passport.serializeUser(function(user:any, cb) {
-    process.nextTick(function() {
-        cb(null, { id: user.id, username: user.username });
-    });
+    passport.serializeUser(function(user:any, callback) {
+    
+        callback(null, { id: user.id, username: user.username });
     });
 
-    passport.deserializeUser(function(user, cb) {
-    process.nextTick(function() {
-        return cb(null, user);
-    });
+    passport.deserializeUser(async function(user: any, callback) {
+       const {id, username} = user
+       ///query to db
+       const userInDB = await getAllUser(id);
+
+        return callback(null, {...userInDB});
     });
 
 }
-export default configPassportLocal
+export default configPassportLocal ;

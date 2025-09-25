@@ -31,8 +31,8 @@ const handleCreateUser = async (
   });
   return user;
 };
-const getAllUser = async () => {
-  const users = await prisma.user.findMany();
+const getAllUser = async (id:string) => {
+  const users = await prisma.user.findUnique({where:{id:+id}});
   return users;
 };
 const getAllRole = async () => {

@@ -8,7 +8,8 @@ const getDashboardPage = async (req: Request, res: Response) => {
 };
 const getAdminUserPage = async (req: Request, res: Response) => {
   //get user
-  const users = await getAllUser();
+  const id = req.params.id; 
+  const users = await getAllUser(id);
   return res.render("admin/user/show.ejs", {
     users: users,
   });
