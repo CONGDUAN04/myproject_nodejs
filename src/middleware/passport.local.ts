@@ -3,7 +3,7 @@ import { get } from 'node:http';
 import { URLSearchParams } from 'node:url';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { comparePassword, getAllUser } from 'services/user.service';
+import { comparePassword, getAllUser, getUserById } from 'services/user.service';
 const configPassportLocal = () => {
     passport.use(new LocalStrategy({passReqToCallback:true},async function verify(req,username, password, callback) {
         const {session} = req as any;
@@ -38,7 +38,7 @@ const configPassportLocal = () => {
     passport.deserializeUser(async function(user: any, callback) {
        const {id, username} = user
        ///query to db
-       const userInDB = await getAllUser(id);
+       const userInDB = await getUserById(id);
 
         return callback(null, {...userInDB});
     });

@@ -31,10 +31,15 @@ const handleCreateUser = async (
   });
   return user;
 };
-const getAllUser = async (id:string) => {
-  const users = await prisma.user.findUnique({where:{id:+id}});
+const getAllUser = async () => {
+  const users = await prisma.user.findMany();
   return users;
 };
+const getUserById = async (id:string) => {
+  const users = await prisma.user.findUnique({where: {id:+id}});
+  return users;
+};
+
 const getAllRole = async () => {
   const roles = await prisma.role.findMany();
   return roles;
@@ -77,5 +82,6 @@ export {
   handleUpdateUser,
   getAllRole,
   hashPassword,
-  comparePassword
+  comparePassword,
+  getUserById
 };
