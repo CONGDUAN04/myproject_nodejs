@@ -26,6 +26,7 @@ import {
   getLoginPage,
   getRegisterPage,
   getSuccessRedirectPage,
+  postLogout,
   postRegister,
 } from "controllers/client/auth.controller";
 import passport from "passport";
@@ -38,7 +39,7 @@ const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
   router.get("/success-redirect", getSuccessRedirectPage);
   router.get("/product/:id", getProductPage);
-  router.get("/login", isLogin, getLoginPage);
+  router.get("/login", getLoginPage);
   router.post(
     "/login",
     passport.authenticate("local", {
@@ -47,10 +48,11 @@ const webRoutes = (app: Express) => {
       failureMessage: true,
     })
   );
+  router.post("/logout", postLogout);
   router.get("/register", getRegisterPage);
   router.post("/register", postRegister);
   //admin dashboard router
-  router.get("/admin", isAdmin, getDashboardPage);
+  router.get("/admin", getDashboardPage);
   // admin manage user router
   router.get("/admin/user", getAdminUserPage);
   router.get("/admin/create-user", getCreateUserPage);
@@ -81,8 +83,8 @@ const webRoutes = (app: Express) => {
     fileUploadMiddleware("image", "images/product"),
     postUpdateProduct
   );
-
   router.get("/admin/order", getAdminOrderPage);
-  app.use("/", router);
+
+  app.use("/", isAdmin, router);
 };
 export default webRoutes;

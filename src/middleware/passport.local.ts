@@ -36,7 +36,7 @@ const configPassportLocal = () => {
         // throw new Error("Invalid password");
         return callback(null, false, { message: `username/password Invalid` });
       } else {
-        return callback(null, user);
+        return callback(null, user as any);
       }
     })
   );

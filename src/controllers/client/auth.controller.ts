@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { registerNewUser } from "services/client/auth.service";
 import {
   RegisterSchema,
@@ -46,4 +46,18 @@ const getSuccessRedirectPage = (req: Request, res: Response) => {
     res.redirect("/");
   }
 };
-export { getLoginPage, getRegisterPage, postRegister, getSuccessRedirectPage };
+const postLogout = (req: Request, res: Response, next: NextFunction) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+};
+export {
+  getLoginPage,
+  getRegisterPage,
+  postRegister,
+  getSuccessRedirectPage,
+  postLogout,
+};
