@@ -22,8 +22,13 @@ import {
   postDeleteProduct,
   postUpdateProduct,
 } from "controllers/admin/product.controller";
-import { getLoginPage, getRegisterPage, postRegister } from "controllers/client/auth.controller";
+import {
+  getLoginPage,
+  getRegisterPage,
+  postRegister,
+} from "controllers/client/auth.controller";
 import passport from "passport";
+import { isLogin } from "src/middleware/auth";
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
@@ -31,14 +36,17 @@ const router = express.Router();
 const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
   router.get("/product/:id", getProductPage);
-  router.get("/login", getLoginPage);
-  router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureMessage: true
-}));
+  router.get("/login", isLogin, getLoginPage);
+  router.post(
+    "/login",
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/login",
+      failureMessage: true,
+    })
+  );
   router.get("/register", getRegisterPage);
-  router.post("/register",postRegister);
+  router.post("/register", postRegister);
   //admin dashboard router
   router.get("/admin", getDashboardPage);
   // admin manage user router
