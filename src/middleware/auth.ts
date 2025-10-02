@@ -9,4 +9,13 @@ const isLogin = (req: Request, res: Response, next: NextFunction) => {
     next(); // Proceed to the next middleware or route handler
   }
 };
-export { isLogin };
+const isAdmin = (req: Request, res: Response, next: NextFunction) => {
+  const user = req.user as any;
+  if (user?.role?.name === "ADMIN") {
+    res.redirect("/admin");
+  } else {
+    res.redirect("/");
+  }
+};
+
+export { isLogin, isAdmin };
