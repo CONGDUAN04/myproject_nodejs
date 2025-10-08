@@ -8,13 +8,23 @@ import {
   postUpdateUser,
 } from "controllers/user.controller";
 import {
+  getAdminOrderDetailPage,
   getAdminOrderPage,
   getAdminProductPage,
   getAdminUserPage,
   getDashboardPage,
 } from "controllers/admin/dashboard.controller";
 import fileUploadMiddleware from "src/middleware/multer";
-import { getProductPage } from "controllers/client/product.controller";
+import {
+  getCartPage,
+  getCheckoutPage,
+  getProductPage,
+  getThanksPage,
+  postAddProductToCart,
+  postDeleteProductInCart,
+  postHandleCartToCheckout,
+  postPlaceOrder,
+} from "controllers/client/product.controller";
 import {
   getAdminCreateProductPage,
   getViewProduct,
@@ -51,9 +61,17 @@ const webRoutes = (app: Express) => {
   router.post("/logout", postLogout);
   router.get("/register", getRegisterPage);
   router.post("/register", postRegister);
+
+  router.post("/add-product-to-cart/:id", postAddProductToCart);
+  router.get("/cart", getCartPage);
+  router.post("/delete-product-in-cart/:id", postDeleteProductInCart);
+  router.post("/handle-cart-to-checkout", postHandleCartToCheckout);
+  router.get("/checkout", getCheckoutPage);
+  router.post("/place-order", postPlaceOrder);
+  router.get("/thanks", getThanksPage);
   //admin dashboard router
-  router.get("/admin", getDashboardPage);
   // admin manage user router
+  router.get("/admin", getDashboardPage);
   router.get("/admin/user", getAdminUserPage);
   router.get("/admin/create-user", getCreateUserPage);
   router.post(
@@ -84,7 +102,7 @@ const webRoutes = (app: Express) => {
     postUpdateProduct
   );
   router.get("/admin/order", getAdminOrderPage);
-
+  router.get("/admin/order/:id", getAdminOrderDetailPage);
   app.use("/", isAdmin, router);
 };
 export default webRoutes;

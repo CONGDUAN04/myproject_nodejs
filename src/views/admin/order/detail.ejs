@@ -7,9 +7,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
-    <meta name="author" content="Hỏi Dân IT" />
-    <title>Manage Order - Cong Duan</title>
+    <meta name="description" content="Laptop Shop Admin" />
+    <meta name="author" content="Cong Duan" />
+    <title>View Order Detail - Cong Duan</title>
 
     <!-- Styles -->
     <link
@@ -50,19 +50,6 @@
         color: #fff;
         padding: 10px;
         border-radius: 12px;
-      }
-
-      .btn-create {
-        background: linear-gradient(45deg, #16a085, #1abc9c);
-        border: none;
-        font-weight: 600;
-        border-radius: 0.75rem;
-        color: #fff;
-        box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
-      }
-
-      .btn-create:hover {
-        background: linear-gradient(45deg, #138d75, #16a085);
       }
 
       .custom-breadcrumb {
@@ -108,18 +95,25 @@
         box-shadow: inset 2px 0px 0px #f39c12;
       }
 
-      .avatar-sm {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      .btn-back {
+        background: linear-gradient(45deg, #16a085, #1abc9c);
+        border: none;
+        font-weight: 600;
+        border-radius: 0.75rem;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
       }
 
-      .btn-action {
-        border-radius: 20px;
-        font-size: 0.8rem;
-        padding: 4px 10px;
+      .btn-back:hover {
+        background: linear-gradient(45deg, #138d75, #16a085);
+      }
+
+      .img-product {
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
       }
     </style>
   </head>
@@ -133,7 +127,7 @@
       <div id="layoutSidenav_content">
         <main>
           <div class="container-fluid px-4">
-            <!-- Page title -->
+            <!-- Page Title -->
             <h1 class="mt-4 page-title">
               <i class="fa-solid fa-laptop"></i> Manage Order
             </h1>
@@ -141,20 +135,21 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb mb-4 custom-breadcrumb">
               <li class="breadcrumb-item">
-                <a href="/admin">
-                  <i class="fa-solid fa-house me-1"></i> Dashboard
-                </a>
+                <a href="/admin"><i class="fa-solid fa-house me-1"></i> Dashboard</a>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">
-                <i class="fa-solid fa-laptop me-1"></i> Orders
+              <li class="breadcrumb-item">
+                <a href="/admin/order"><i></i> Orders</a>
+              </li>
+              <li class="breadcrumb-item active">
+                <i class="fa-solid fa-eye me-1"></i> View Details
               </li>
             </ol>
 
-            <!-- Card List Products -->
+            <!-- Card -->
             <div class="card card-modern p-4">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="fw-semibold mb-0">
-                  <i class="fa-solid fa-list me-2 text-warning"></i> List Order
+                <h3 class="fw-semibold mb-0 text-warning">
+                  <i class="fa-solid fa-box-open me-2"></i>View Order Detail (ID = <%= id %>)
                 </h3>
               </div>
 
@@ -162,43 +157,51 @@
                 <table class="table table-hover table-bordered align-middle text-center">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>User</th>
-                      <th>Total Price</th>
-                      <th>status</th>
-                      <th>Payment Method</th>
-                      <th>Payment Status</th>
-                      <th>Action</th>
+                      <th>Product</th>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Total</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% orders.forEach(function (order) { %>
+                    <% orderDetails.forEach(function(orderDetail) { %>
                       <tr>
-                        <td><%= order.id %></td>
-                        <td><%= order?.user?.fullName ?? "" %></td>
-                        <td><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
-                        .format(order.totalPrice) %></td>
-                        <td><%= order.status %></td>
-                        <td><%= order. paymentMethod %></td>
-                        <td><%= order.paymentStatus %></td>
                         <td>
-                          <div style="display: flex; gap:10px">
-                            <form
-                            action="/admin/order/<%= order.id%>" method="get"
-                            >
-                              <button
-                                type="submit"
-                                class="btn btn-sm btn-warning btn-action"
-                              >
-                                <i class="fa-solid fa-eye"></i> View Detail
-                              </button>
-                            </form>
-                          </div>
+                          <img
+                            src="/images/product/<%= orderDetail.product.image %>"
+                            alt="<%= orderDetail.product.name %>"
+                            class="img-product"
+                          />
+                        </td>
+                        <td>
+                          <a
+                            href="/product/<%= orderDetail.product.id %>"
+                            target="_blank"
+                            class="fw-semibold text-decoration-none text-dark"
+                          >
+                            <%= orderDetail.product.name %>
+                          </a>
+                        </td>
+                        <td>
+                          <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                            .format(orderDetail.price) %>
+                        </td>
+                        <td><%= orderDetail.quantity %></td>
+                        <td>
+                          <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
+                            .format(orderDetail.price * orderDetail.quantity) %>
                         </td>
                       </tr>
                     <% }) %>
                   </tbody>
                 </table>
+              </div>
+
+              <div class="mt-4 text-end">
+                <a href="/admin/order" class="btn btn-back">
+                  <i class="fa-solid fa-arrow-left"></i> Back to Orders
+                </a>
               </div>
             </div>
           </div>
@@ -214,10 +217,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="/admin/js/scripts.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="/admin/js/datatables-simple-demo.js"></script>
   </body>
 </html>

@@ -1,6 +1,5 @@
 import e, { NextFunction } from "express";
 import { Request, Response } from "express";
-import { User } from "@prisma/client";
 const isLogin = (req: Request, res: Response, next: NextFunction) => {
   const isAuthenticated = req.isAuthenticated();
   if (isAuthenticated) {

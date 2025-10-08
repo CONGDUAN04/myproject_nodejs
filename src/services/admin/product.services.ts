@@ -63,7 +63,6 @@ const handleUpdateProductById = async (
   });
   return updatedProduct;
 };
-
 export {
   createProduct,
   getProductList,

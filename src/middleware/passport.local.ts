@@ -1,9 +1,9 @@
 import { prisma } from "config/client";
-import { get } from "node:http";
 import { URLSearchParams } from "node:url";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { getUserWithRoleById } from "services/client/auth.service";
+import { getUserSumCart } from "services/client/item.service";
 import {
   comparePassword,
   getAllUser,
@@ -48,9 +48,10 @@ const configPassportLocal = () => {
   passport.deserializeUser(async function (user: any, callback) {
     const { id, username } = user;
     ///query to db
-    const userInDB = await getUserWithRoleById(id);
-
-    return callback(null, { ...userInDB });
+    const userInDB: any = await getUserWithRoleById(id);
+    const sumCart = await getUserSumCart(id);
+    console.log("check sumcar", sumCart);
+    return callback(null, { ...userInDB, sumCart: sumCart });
   });
 };
 export default configPassportLocal;
