@@ -98,14 +98,24 @@ const updateCartDetailBeforeCheckout = async (
   data: {
     id: string;
     quantity: string;
-  }[]
+  }[], cartId: string
 ) => {
+  let quantity = 0;
   for (let i = 0; i < data.length; i++) {
+    quantity += +data[i].quantity;
     await prisma.cartDetail.update({
       where: { id: +data[i].id },
       data: { quantity: +data[i].quantity },
     });
   }
+  //cập nhập lại sum cart
+  await prisma.cart.update({
+    where: { id: +cartId },
+    data: {
+      sum: quantity,
+    },
+  })
+
 };
 const getUserSumCart = async (id: string) => {
   const user = await prisma.cart.findUnique({
@@ -120,9 +130,14 @@ const deleteProductToCart = async (
   sumCart: number
 ) => {
   //Xoá cart detail
+  const currentCartDetail = await prisma.cartDetail.findUnique({
+    where: { id: cartDetailId },
+  });
+  const quantity = currentCartDetail.quantity;
   await prisma.cartDetail.delete({
     where: { id: cartDetailId },
   });
+  //cập nhập lại sum cart
   if (sumCart === 1) {
     //delete cart
     await prisma.cart.delete({
@@ -134,7 +149,7 @@ const deleteProductToCart = async (
       where: { userId: userId },
       data: {
         sum: {
-          decrement: 1,
+          decrement: quantity,
         },
       },
     });
@@ -182,7 +197,21 @@ const handlePlaceOrder = async (
     });
   }
 };
-
+const getOrderHistory = async (userId: number) => {
+  return await prisma.order.findMany({
+    where: { userId },
+    include: { orderDetails: { include: { product: true } } },
+  });
+};
+const postAddToCartFromDetailPage = async (req: e.Request, res: e.Response) => {
+  const { id } = req.params;
+  const { quantity } = req.body;
+  const user = req.user;
+  if (user) {
+    await addProductToCart(+quantity, +id, user);
+    return res.redirect(`/product/${id}`);
+  }
+}
 export {
   getProducts,
   getProductById,
@@ -192,4 +221,5 @@ export {
   deleteProductToCart,
   getUserSumCart,
   handlePlaceOrder,
+  getOrderHistory, postAddToCartFromDetailPage
 };

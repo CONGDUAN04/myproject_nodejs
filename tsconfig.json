@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
     "module": "commonjs", // dịch code ts sang js
     "esModuleInterop": true, // cho phép sử dụng import/export của ES6
     "target": "es6", // dịch code js version nào?

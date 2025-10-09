@@ -18,6 +18,7 @@ import fileUploadMiddleware from "src/middleware/multer";
 import {
   getCartPage,
   getCheckoutPage,
+  getOrderHistoryPage,
   getProductPage,
   getThanksPage,
   postAddProductToCart,
@@ -41,6 +42,7 @@ import {
 } from "controllers/client/auth.controller";
 import passport from "passport";
 import { isAdmin, isLogin } from "src/middleware/auth";
+import { postAddToCartFromDetailPage } from "services/client/item.service";
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
@@ -69,6 +71,8 @@ const webRoutes = (app: Express) => {
   router.get("/checkout", getCheckoutPage);
   router.post("/place-order", postPlaceOrder);
   router.get("/thanks", getThanksPage);
+  router.get("/order-history", getOrderHistoryPage)
+  router.post("/add-to-cart-from-detail-page/:id", postAddToCartFromDetailPage);
   //admin dashboard router
   // admin manage user router
   router.get("/admin", getDashboardPage);

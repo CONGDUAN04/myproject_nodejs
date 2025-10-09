@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   addProductToCart,
   deleteProductToCart,
+  getOrderHistory,
   getProductById,
   getProductInCart,
   handlePlaceOrder,
@@ -31,8 +32,9 @@ const getCartPage = async (req: Request, res: Response) => {
   const totalPrice = cartDetails
     ?.map((item) => item.price * +item.quantity)
     ?.reduce((a, b) => a + b, 0);
+  const cartId = cartDetails.length ? cartDetails[0].cartId : 0
 
-  return res.render("client/product/cart", { cartDetails, totalPrice });
+  return res.render("client/product/cart", { cartDetails, totalPrice, cartId });
 };
 const postDeleteProductInCart = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -58,9 +60,11 @@ const getCheckoutPage = async (req: Request, res: Response) => {
 const postHandleCartToCheckout = async (req: Request, res: Response) => {
   const user = req.user;
   if (!user) return res.redirect("/login");
+
+  const { cartId } = req.body;
   const currentCartDetails: { id: string; quantity: string }[] =
     req.body?.cartDetails ?? [];
-  await updateCartDetailBeforeCheckout(currentCartDetails);
+  await updateCartDetailBeforeCheckout(currentCartDetails, cartId);
   return res.redirect("/checkout");
 };
 const postPlaceOrder = async (req: Request, res: Response) => {
@@ -83,6 +87,12 @@ const getThanksPage = async (req: Request, res: Response) => {
   //logic place order
   return res.render("client/product/thanks.ejs");
 };
+const getOrderHistoryPage = async (req: Request, res: Response) => {
+  const user = req.user;
+  if (!user) return res.redirect("/login");
+  const orders = await getOrderHistory(user.id);
+  return res.render("client/product/order-history.ejs", { orders });
+}
 export {
   getProductPage,
   postAddProductToCart,
@@ -92,4 +102,5 @@ export {
   postHandleCartToCheckout,
   postPlaceOrder,
   getThanksPage,
+  getOrderHistoryPage
 };
