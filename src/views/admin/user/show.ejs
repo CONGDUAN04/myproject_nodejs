@@ -3,13 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
     <meta name="author" content="Hỏi Dân IT" />
     <title>Manage Users - Cong Duan</title>
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
+
+    <!-- CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet" />
     <link href="/admin/css/styles.css" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"></script>
+
     <style>
       body {
         background: #f4f6f9;
@@ -92,9 +99,26 @@
         font-size: 0.8rem;
         padding: 4px 10px;
       }
+      /* Pagination Style */
+      .pagination {
+        margin-top: 20px;
+      }
+      .pagination .page-link {
+        border-radius: 0.5rem;
+        color: #2c3e50;
+        font-weight: 500;
+      }
+      .pagination .page-item.active .page-link {
+        background: linear-gradient(45deg, #f39c12, #e67e22);
+        border-color: transparent;
+        color: #fff;
+      }
+      .pagination .page-link:hover {
+        background-color: #f8c471;
+        color: #fff;
+      }
     </style>
   </head>
-
   <body class="sb-nav-fixed">
     <%- include('../layout/header'); -%>
     <div id="layoutSidenav">
@@ -108,7 +132,7 @@
             </h1>
 
             <!-- Breadcrumb -->
-             <ol class="breadcrumb mb-4 custom-breadcrumb">
+            <ol class="breadcrumb mb-4 custom-breadcrumb">
               <li class="breadcrumb-item">
                 <a href="/admin">
                   <i class="fa-solid fa-house me-1"></i> Dashboard
@@ -121,14 +145,19 @@
 
             <!-- Card List Users -->
             <div class="card card-modern p-4">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="fw-semibold mb-0"><i class="fa-solid fa-list me-2 text-warning"></i>List Users</h3>
+              <div
+                class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="fw-semibold mb-0">
+                  <i class="fa-solid fa-list me-2 text-warning"></i>List Users
+                </h3>
                 <a href="/admin/create-user" class="btn btn-create px-3 py-2">
                   <i class="fa-solid fa-user-plus me-2"></i> CREATE NEW USER
                 </a>
               </div>
+
               <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
+                <table
+                  class="table table-hover table-bordered align-middle text-center">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -141,37 +170,73 @@
                   </thead>
                   <tbody>
                     <% users.forEach(function (user) { %>
-                      <tr>
-                        <td><%= user.id %></td>
-                        <td>
-                          <% if (user.avatar) { %>
-                            <img src="/images/<%= user.avatar %>" class="avatar-sm" alt="avatar"/>
-                          <% } else { %>
-                            <img src="https://via.placeholder.com/40x40?text=?" class="avatar-sm" alt="avatar"/>
-                          <% } %>
-                        </td>
-                        <td><%= user.fullName %></td>
-                        <td><%= user.username %></td>
-                        <td><%= user.address %></td>
-                        <td>
-                          <div class="d-flex justify-content-center gap-2">
-                            <form action="/admin/view-user/<%= user.id %>" method="get">
-                              <button type="submit" class="btn btn-sm btn-warning btn-action">
-                                <i class="fa-solid fa-eye"></i> View
-                              </button>
-                            </form>
-                            <form action="/admin/delete-user/<%= user.id %>" method="post">
-                              <button type="submit" class="btn btn-sm btn-danger btn-action">
-                                <i class="fa-solid fa-trash"></i> Delete
-                              </button>
-                            </form>
-                          </div>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td><%= user.id %></td>
+                      <td>
+                        <% if (user.avatar) { %>
+                        <img src="/images/<%= user.avatar %>" class="avatar-sm"
+                          alt="avatar" />
+                        <% } else { %>
+                        <img src="https://via.placeholder.com/40x40?text=?"
+                          class="avatar-sm" alt="avatar" />
+                        <% } %>
+                      </td>
+                      <td><%= user.fullName %></td>
+                      <td><%= user.username %></td>
+                      <td><%= user.address %></td>
+                      <td>
+                        <div class="d-flex justify-content-center gap-2">
+                          <form action="/admin/view-user/<%= user.id %>"
+                            method="get">
+                            <button type="submit"
+                              class="btn btn-sm btn-warning btn-action">
+                              <i class="fa-solid fa-eye"></i> View
+                            </button>
+                          </form>
+                          <form action="/admin/delete-user/<%= user.id %>"
+                            method="post">
+                            <button type="submit"
+                              class="btn btn-sm btn-danger btn-action">
+                              <i class="fa-solid fa-trash"></i> Delete
+                            </button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
                     <% }) %>
                   </tbody>
                 </table>
               </div>
+              <!-- Pagination -->
+              <nav aria-label="Page navigation example"
+                class="d-flex justify-content-center mt-4">
+                <ul class="pagination pagination-rounded shadow-sm">
+                  <li class="page-item">
+                    <a
+                      class="<%=page === 1 ? 'disabled page-link' :'page-link'%>"
+                      href="/admin/user?page=<%= page -1 %>"
+                      aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <% for(var i=1; i<=totalPages; i++) {%>
+                  <li class="page-item"><a
+                      class="<%=page === i ? 'active page-link' :'page-link'%>"
+                      href="/admin/user?page=<%= i %>">
+                      <%= i %>
+                    </a>
+                  </li>
+                  <% } %>
+                  <li class="page-item">
+                    <a
+                      class="<%=page === totalPages ? 'disabled page-link' :'page-link'%>"
+                      href="/admin/user?page=<%= page + 1 %>"
+                      aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </main>
@@ -179,9 +244,14 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <!-- JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"></script>
     <script src="/admin/js/scripts.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+      crossorigin="anonymous"></script>
     <script src="/admin/js/datatables-simple-demo.js"></script>
   </body>
 </html>

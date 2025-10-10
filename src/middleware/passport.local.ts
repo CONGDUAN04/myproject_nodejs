@@ -2,12 +2,10 @@ import { prisma } from "config/client";
 import { URLSearchParams } from "node:url";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { getUserWithRoleById } from "services/client/auth.service";
-import { getUserSumCart } from "services/client/item.service";
+import { getUserWithRoleById } from "services/client/auth.services";
+import { getUserSumCart } from "services/client/item.services";
 import {
   comparePassword,
-  getAllUser,
-  getUserById,
 } from "services/user.service";
 const configPassportLocal = () => {
   passport.use(

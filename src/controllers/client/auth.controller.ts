@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { registerNewUser } from "services/client/auth.service";
+import { registerNewUser } from "services/client/auth.services";
 import {
   RegisterSchema,
   TRegisterSchema,

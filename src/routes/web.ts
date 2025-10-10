@@ -42,7 +42,7 @@ import {
 } from "controllers/client/auth.controller";
 import passport from "passport";
 import { isAdmin, isLogin } from "src/middleware/auth";
-import { postAddToCartFromDetailPage } from "services/client/item.service";
+import { postAddToCartFromDetailPage } from "services/client/item.services";
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 

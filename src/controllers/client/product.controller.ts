@@ -7,7 +7,7 @@ import {
   getProductInCart,
   handlePlaceOrder,
   updateCartDetailBeforeCheckout,
-} from "services/client/item.service";
+} from "services/client/item.services";
 
 const getProductPage = async (req: Request, res: Response) => {
   const { id } = req.params;
