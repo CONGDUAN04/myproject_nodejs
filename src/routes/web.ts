@@ -6,6 +6,7 @@ import {
   postDeleteUser,
   getViewUser,
   postUpdateUser,
+  getProductFilterPage,
 } from "controllers/user.controller";
 import {
   getAdminOrderDetailPage,
@@ -49,6 +50,7 @@ const upload = multer({ dest: "uploads/" });
 const router = express.Router();
 const webRoutes = (app: Express) => {
   router.get("/", getHomePage);
+  router.get("/products", getProductFilterPage)
   router.get("/success-redirect", getSuccessRedirectPage);
   router.get("/product/:id", getProductPage);
   router.get("/login", getLoginPage);

@@ -16,6 +16,14 @@ const getHomePage = async (req: Request, res: Response) => {
   const products = await getProducts(currentPage, 8);
   return res.render("client/home/show.ejs", { products, totalPages: +totalPages, page: +currentPage });
 };
+const getProductFilterPage = async (req: Request, res: Response) => {
+  const { page } = req.query;
+  let currentPage = page ? +page : 1;
+  if (currentPage <= 0) currentPage = 1;
+  const totalPages = await countTotalProductClientPages(6);
+  const products = await getProducts(currentPage, 6);
+  return res.render("client/product/filter.ejs", { products, totalPages: +totalPages, page: +currentPage });
+}
 const getCreateUserPage = async (req: Request, res: Response) => {
   const roles = await getAllRole();
   return res.render("admin/user/create.ejs", { roles: roles });
@@ -58,4 +66,5 @@ export {
   postDeleteUser,
   getViewUser,
   postUpdateUser,
+  getProductFilterPage
 };
