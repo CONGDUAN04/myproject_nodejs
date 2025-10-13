@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Laptop Shop Admin" />
     <meta name="author" content="Cong Duan" />
     <title>View Order Detail - Cong Duan</title>
@@ -14,106 +13,131 @@
     <!-- Styles -->
     <link
       href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <link href="/admin/css/styles.css" rel="stylesheet" />
 
     <!-- Font Awesome -->
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
 
     <style>
       body {
-        background: #f4f6f9;
+        background: #f5f7fa;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
       }
 
       .card-modern {
-        border-radius: 1rem;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        border: none;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        border: 1px solid #e1e8ed;
         background: #fff;
       }
 
       .page-title {
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 0;
         display: flex;
         align-items: center;
         gap: 10px;
-        color: #2c3e50;
       }
 
       .page-title i {
-        background: linear-gradient(135deg, #f39c12, #e67e22);
-        color: #fff;
-        padding: 10px;
-        border-radius: 12px;
+        color: #4a5568;
+        font-size: 1.75rem;
       }
 
       .custom-breadcrumb {
-        background: #fff;
-        padding: 10px 15px;
-        border-radius: 0.75rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        background: transparent;
+        padding: 0;
+        margin-bottom: 1.5rem;
       }
 
       .custom-breadcrumb .breadcrumb-item a {
-        color: #3498db;
-        font-weight: 500;
+        color: #4a5568;
+        font-weight: 400;
         text-decoration: none;
+        font-size: 0.875rem;
       }
 
       .custom-breadcrumb .breadcrumb-item a:hover {
-        text-decoration: underline;
-        color: #1d6fa5;
+        color: #2563eb;
+        text-decoration: none;
       }
 
       .custom-breadcrumb .breadcrumb-item.active {
-        font-weight: 600;
-        color: #555;
+        font-weight: 400;
+        color: #6b7280;
       }
 
       table {
-        border-radius: 0.75rem;
+        border-radius: 0;
+        font-size: 0.875rem;
         overflow: hidden;
       }
 
       table thead {
-        background: linear-gradient(45deg, #f8c471, #f39c12);
-        color: #fff;
+        background: #f9fafb;
+        color: #374151;
         font-weight: 600;
+        border-bottom: 2px solid #e5e7eb;
+      }
+
+      table thead th {
+        padding: 12px 16px;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+      }
+
+      table tbody td {
+        padding: 12px 16px;
+        vertical-align: middle;
       }
 
       table tbody tr {
-        transition: all 0.2s;
+        transition: background 0.15s;
+        border-bottom: 1px solid #f3f4f6;
       }
 
       table tbody tr:hover {
-        background: #fcf3cf !important;
-        box-shadow: inset 2px 0px 0px #f39c12;
+        background: #f9fafb;
       }
 
       .btn-back {
-        background: linear-gradient(45deg, #16a085, #1abc9c);
+        background: #2563eb;
         border: none;
-        font-weight: 600;
-        border-radius: 0.75rem;
+        font-weight: 500;
+        border-radius: 6px;
         color: #fff;
-        box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
+        padding: 10px 20px;
+        font-size: 0.875rem;
+        transition: background 0.2s;
       }
 
       .btn-back:hover {
-        background: linear-gradient(45deg, #138d75, #16a085);
+        background: #1d4ed8;
+        color: #fff;
       }
 
       .img-product {
         width: 80px;
         height: 80px;
-        border-radius: 12px;
+        border-radius: 6px;
         object-fit: cover;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        border: 1px solid #e5e7eb;
+      }
+
+      h3.fw-semibold {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1f2937;
+      }
+
+      h3.text-warning {
+        color: #f59e0b !important;
       }
     </style>
   </head>
@@ -135,7 +159,8 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb mb-4 custom-breadcrumb">
               <li class="breadcrumb-item">
-                <a href="/admin"><i class="fa-solid fa-house me-1"></i> Dashboard</a>
+                <a href="/admin"><i class="fa-solid fa-house me-1"></i>
+                  Dashboard</a>
               </li>
               <li class="breadcrumb-item">
                 <a href="/admin/order"><i></i> Orders</a>
@@ -147,14 +172,17 @@
 
             <!-- Card -->
             <div class="card card-modern p-4">
-              <div class="d-flex justify-content-between align-items-center mb-3">
+              <div
+                class="d-flex justify-content-between align-items-center mb-3">
                 <h3 class="fw-semibold mb-0 text-warning">
-                  <i class="fa-solid fa-box-open me-2"></i>View Order Detail (ID = <%= id %>)
+                  <i class="fa-solid fa-box-open me-2"></i>View Order Detail (ID
+                  = <%= id %>)
                 </h3>
               </div>
 
               <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle text-center">
+                <table
+                  class="table table-hover table-bordered align-middle text-center">
                   <thead>
                     <tr>
                       <th>Product</th>
@@ -166,33 +194,33 @@
                   </thead>
                   <tbody>
                     <% orderDetails.forEach(function(orderDetail) { %>
-                      <tr>
-                        <td>
-                          <img
-                            src="/images/product/<%= orderDetail.product.image %>"
-                            alt="<%= orderDetail.product.name %>"
-                            class="img-product"
-                          />
-                        </td>
-                        <td>
-                          <a
-                            href="/product/<%= orderDetail.product.id %>"
-                            target="_blank"
-                            class="fw-semibold text-decoration-none text-dark"
-                          >
-                            <%= orderDetail.product.name %>
-                          </a>
-                        </td>
-                        <td>
-                          <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
-                            .format(orderDetail.price) %>
-                        </td>
-                        <td><%= orderDetail.quantity %></td>
-                        <td>
-                          <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' })
-                            .format(orderDetail.price * orderDetail.quantity) %>
-                        </td>
-                      </tr>
+                    <tr>
+                      <td>
+                        <img
+                          src="/images/product/<%= orderDetail.product.image %>"
+                          alt="<%= orderDetail.product.name %>"
+                          class="img-product" />
+                      </td>
+                      <td>
+                        <a
+                          href="/product/<%= orderDetail.product.id %>"
+                          target="_blank"
+                          class="fw-semibold text-decoration-none text-dark">
+                          <%= orderDetail.product.name %>
+                        </a>
+                      </td>
+                      <td>
+                        <%= new Intl.NumberFormat('vi-VN', { style: 'currency',
+                        currency: 'VND' })
+                        .format(orderDetail.price) %>
+                      </td>
+                      <td><%= orderDetail.quantity %></td>
+                      <td>
+                        <%= new Intl.NumberFormat('vi-VN', { style: 'currency',
+                        currency: 'VND' })
+                        .format(orderDetail.price * orderDetail.quantity) %>
+                      </td>
+                    </tr>
                     <% }) %>
                   </tbody>
                 </table>
@@ -214,8 +242,7 @@
     <!-- Scripts -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <script src="/admin/js/scripts.js"></script>
   </body>
 </html>

@@ -23,116 +23,186 @@
 
     <style>
       body {
-        background: #f4f6f9;
+        background: #f5f7fa;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
       }
 
       .card-modern {
-        border-radius: 1rem;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        border: none;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+        border: 1px solid #e1e8ed;
         background: #fff;
       }
 
       .page-title {
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 0;
         display: flex;
         align-items: center;
         gap: 10px;
-        color: #2c3e50;
       }
 
       .page-title i {
-        background: linear-gradient(135deg, #f39c12, #e67e22);
-        color: #fff;
-        padding: 10px;
-        border-radius: 12px;
+        color: #4a5568;
+        font-size: 1.75rem;
       }
 
       .btn-create {
-        background: linear-gradient(45deg, #16a085, #1abc9c);
+        background: #2563eb;
         border: none;
-        font-weight: 600;
-        border-radius: 0.75rem;
+        font-weight: 500;
+        border-radius: 6px;
         color: #fff;
-        box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
+        padding: 10px 20px;
+        font-size: 0.875rem;
+        transition: background 0.2s;
       }
 
       .btn-create:hover {
-        background: linear-gradient(45deg, #138d75, #16a085);
+        background: #1d4ed8;
+        color: #fff;
       }
 
       .custom-breadcrumb {
-        background: #fff;
-        padding: 10px 15px;
-        border-radius: 0.75rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        background: transparent;
+        padding: 0;
+        margin-bottom: 1.5rem;
       }
 
       .custom-breadcrumb .breadcrumb-item a {
-        color: #3498db;
-        font-weight: 500;
+        color: #4a5568;
+        font-weight: 400;
         text-decoration: none;
+        font-size: 0.875rem;
       }
 
       .custom-breadcrumb .breadcrumb-item a:hover {
-        text-decoration: underline;
-        color: #1d6fa5;
+        color: #2563eb;
+        text-decoration: none;
       }
 
       .custom-breadcrumb .breadcrumb-item.active {
-        font-weight: 600;
-        color: #555;
+        font-weight: 400;
+        color: #6b7280;
       }
 
       table {
-        border-radius: 0.75rem;
+        border-radius: 0;
+        font-size: 0.875rem;
         overflow: hidden;
       }
 
       table thead {
-        background: linear-gradient(45deg, #f8c471, #f39c12);
-        color: #fff;
+        background: #f9fafb;
+        color: #374151;
         font-weight: 600;
+        border-bottom: 2px solid #e5e7eb;
+      }
+
+      table thead th {
+        padding: 12px 16px;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+      }
+
+      table tbody td {
+        padding: 12px 16px;
+        vertical-align: middle;
       }
 
       table tbody tr {
-        transition: all 0.2s;
+        transition: background 0.15s;
+        border-bottom: 1px solid #f3f4f6;
       }
 
       table tbody tr:hover {
-        background: #fcf3cf !important;
-        box-shadow: inset 2px 0px 0px #f39c12;
+        background: #f9fafb;
       }
 
       .avatar-sm {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         object-fit: cover;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        border: 2px solid #e5e7eb;
       }
 
       .btn-action {
-        border-radius: 20px;
+        border-radius: 4px;
         font-size: 0.8rem;
-        padding: 4px 10px;
-      }
-      .pagination .page-link {
-        border-radius: 0.5rem;
-        color: #2c3e50;
+        padding: 6px 12px;
         font-weight: 500;
+        transition: all 0.2s;
       }
-      .pagination .page-item.active .page-link {
-        background: linear-gradient(45deg, #f39c12, #e67e22);
-        border-color: transparent;
-        color: #fff;
-      }
-      .pagination .page-link:hover {
-        background-color: #f8c471;
+
+      .btn-warning {
+        background: #f59e0b;
+        border-color: #f59e0b;
         color: #fff;
       }
 
+      .btn-warning:hover {
+        background: #d97706;
+        border-color: #d97706;
+        color: #fff;
+      }
+
+      .btn-danger {
+        background: #ef4444;
+        border-color: #ef4444;
+        color: #fff;
+      }
+
+      .btn-danger:hover {
+        background: #dc2626;
+        border-color: #dc2626;
+        color: #fff;
+      }
+
+      .pagination {
+        margin-top: 24px;
+      }
+
+      .pagination .page-link {
+        border-radius: 4px;
+        color: #4a5568;
+        font-weight: 400;
+        border: 1px solid #e5e7eb;
+        margin: 0 3px;
+        padding: 8px 12px;
+      }
+
+      .pagination .page-item.active .page-link {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #fff;
+      }
+
+      .pagination .page-link:hover:not(.active) {
+        background-color: #f3f4f6;
+        border-color: #d1d5db;
+        color: #1f2937;
+      }
+
+      .pagination .page-link.disabled {
+        background-color: #f9fafb;
+        border-color: #e5e7eb;
+        color: #9ca3af;
+        cursor: not-allowed;
+      }
+
+      h3.fw-semibold {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1f2937;
+      }
+
+      h3.fw-semibold i {
+        color: #6b7280;
+      }
     </style>
   </head>
 

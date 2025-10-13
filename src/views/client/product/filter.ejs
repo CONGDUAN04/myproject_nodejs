@@ -282,37 +282,42 @@
                                     </div>
                                 </div>
                                 <% }) %>
-
+                                <% if (products?.length) { %>
                                 <div
                                     class="pagination d-flex justify-content-center mt-5">
                                     <li
-                                        class="<%= page === 1 ? 'disabled page-item' : 'page-item' %> ">
+                                        class="<%= page === 1 ? 'disabled page-item' : 'page-item' %>">
                                         <a class="page-link"
-                                            href="/products?page=<%= page - 1  %>"
+                                            href="/products?page=<%= page - 1 %>"
                                             aria-label="Previous">
                                             <span
                                                 aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
-                                    <% for(var i=1; i <= totalPages; i++) {%>
+                                    <% for (var i = 1; i <= totalPages; i++) {
+                                    %>
                                     <li class="page-item">
                                         <a
                                             class="<%= page === i ? 'active page-link' : 'page-link' %>"
-                                            href="/products?page=<%= i  %>">
+                                            href="/products?page=<%= i %>">
                                             <%= i %>
                                         </a>
                                     </li>
                                     <% } %>
                                     <li
-                                        class="<%= page === totalPages ? 'disabled page-item' : 'page-item' %> ">
+                                        class="<%= page === totalPages ? 'disabled page-item' : 'page-item' %>">
                                         <a class="page-link"
-                                            href="/products?page=<%= page + 1  %>"
+                                            href="/products?page=<%= page + 1 %>"
                                             aria-label="Next">
                                             <span
                                                 aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>
                                 </div>
+                                <% } else { %>
+                                <div>Không tồn tại sản phẩm</div>
+                                <% } %>
+
                             </div>
                         </div>
                     </div>

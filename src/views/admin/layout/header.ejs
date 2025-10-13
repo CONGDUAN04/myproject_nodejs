@@ -1,3 +1,84 @@
+<style>
+  /* Header/Navbar Styles */
+  .sb-topnav {
+    background: #1f2937 !important;
+    border-bottom: 1px solid #374151;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  }
+
+  .navbar-brand {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #fff !important;
+    padding: 0.875rem 1rem;
+    transition: opacity 0.2s;
+  }
+
+  .navbar-brand:hover {
+    opacity: 0.85;
+  }
+
+  #sidebarToggle {
+    color: #9ca3af;
+    padding: 0.5rem;
+    border: none;
+    transition: color 0.2s;
+  }
+
+  #sidebarToggle:hover {
+    color: #fff;
+  }
+
+  .sb-topnav span {
+    color: #e5e7eb !important;
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  .nav-link {
+    color: #9ca3af !important;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: #fff !important;
+  }
+
+  .dropdown-menu {
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-size: 0.875rem;
+  }
+
+  .dropdown-item {
+    padding: 0.5rem 1rem;
+    color: #374151;
+    transition: background 0.2s;
+  }
+
+  .dropdown-item:hover {
+    background: #f3f4f6;
+    color: #1f2937;
+  }
+
+  .dropdown-item button {
+    background: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .dropdown-divider {
+    margin: 0.5rem 0;
+    border-color: #e5e7eb;
+  }
+</style>
+
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
   <!-- Navbar Brand-->
   <a class="navbar-brand ps-3" href="/admin">Laptopshop</a>
@@ -5,14 +86,12 @@
   <button
     class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
     id="sidebarToggle"
-    href="#!"
-  >
+    href="#!">
     <i class="fas fa-bars"></i>
   </button>
   <!-- Navbar Search-->
   <form
-    class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"
-  >
+    class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
     <span style="color: white">Welcome, Hỏi Dân IT</span>
     <!-- <div class="input-group">
                 <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
@@ -30,13 +109,10 @@
         href="#"
         role="button"
         data-bs-toggle="dropdown"
-        aria-expanded="false"
-        ><i class="fas fa-user fa-fw"></i
-      ></a>
+        aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
       <ul
         class="dropdown-menu dropdown-menu-end"
-        aria-labelledby="navbarDropdown"
-      >
+        aria-labelledby="navbarDropdown">
         <li><a class="dropdown-item" href="#!">Settings</a></li>
 
         <li>
