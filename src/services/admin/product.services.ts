@@ -26,7 +26,6 @@ const createProduct = async (
 };
 
 const getProductList = async (page: number) => {
-
   const pageSize = TOTAL_ITEM_PER_PAGE;
   const skip = (page - 1) * pageSize;
   const products = await prisma.product.findMany({

@@ -330,7 +330,7 @@
     );
   }
 
-  $(".btnAddToCartHomePage").click(function (event) {
+  $(".btnAddToCartHomepage").click(function (event) {
     event.preventDefault();
     if (!isLogin()) {
       $.toast({
