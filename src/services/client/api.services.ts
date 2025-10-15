@@ -1,4 +1,8 @@
 import { prisma } from "config/client"
+import jwt from "jsonwebtoken"
+import { comparePassword } from "services/user.service"
+import "dotenv/config"
+import { ACCOUNT_TYPE } from "config/constant"
 const handleGetAllUser = async () => {
     return await prisma.user.findMany()
 }
@@ -20,4 +24,37 @@ const handleDeleteUserById = async (id: number) => {
         where: { id }
     })
 }
-export { handleGetAllUser, handleGetUserById, handleUpdateUserById, handleDeleteUserById }
+const handleUserLogin = async (username: string, password: string) => {
+    const user = await prisma.user.findUnique({
+        where: { username: username },
+    });
+    if (!user) {
+        //throw error
+        throw new Error(`${username} not found`);
+    }
+    //compare password
+    const isMath = await comparePassword(password, user.password);
+    if (!isMath) {
+        throw new Error("Invalid password");
+    }
+    //co user login => dinh nghia access token
+    const payload = {
+        id: user.id,
+        username: user.username,
+        roleId: user.roleId,
+        accountType: user.accountType,
+        avatar: user.avatar
+    }
+    const secret = process.env.JWT_SECRET;
+    const expiresIn: any = process.env.JWT_EXPIRES_IN;
+    const access_token = jwt.sign(payload, secret, { expiresIn: expiresIn })
+    return access_token
+}
+export {
+    handleGetAllUser,
+    handleGetUserById,
+    handleUpdateUserById,
+    handleDeleteUserById,
+    handleUserLogin
+}
+
