@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 import { comparePassword } from "services/user.service"
 import "dotenv/config"
 import { ACCOUNT_TYPE } from "config/constant"
+import { truncate } from "fs"
 const handleGetAllUser = async () => {
     return await prisma.user.findMany()
 }
@@ -27,6 +28,7 @@ const handleDeleteUserById = async (id: number) => {
 const handleUserLogin = async (username: string, password: string) => {
     const user = await prisma.user.findUnique({
         where: { username: username },
+        include: { role: true }
     });
     if (!user) {
         //throw error
@@ -41,6 +43,7 @@ const handleUserLogin = async (username: string, password: string) => {
     const payload = {
         id: user.id,
         username: user.username,
+        role: user.role,
         roleId: user.roleId,
         accountType: user.accountType,
         avatar: user.avatar
